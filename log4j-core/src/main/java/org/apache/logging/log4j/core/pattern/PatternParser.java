@@ -180,7 +180,7 @@ public final class PatternParser {
         boolean handlesThrowable = false;
 
         for (final PatternConverter converter : converters) {
-            if (converter instanceof NanoTimePatternConverter) {
+            if (converter instanceof NanoTimePatternConverter || converter instanceof SubMillisPatternConverter) {
                 // LOG4J2-1074 Switch to actual clock if nanosecond timestamps are required in config.
                 // LOG4J2-1248 set config nanoclock
                 if (config != null) {
