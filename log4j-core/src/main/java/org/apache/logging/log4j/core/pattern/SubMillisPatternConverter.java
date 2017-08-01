@@ -29,9 +29,9 @@ import org.apache.logging.log4j.util.PerformanceSensitive;
 public final class SubMillisPatternConverter extends LogEventPatternConverter {
     
     
-    private int format=0;
-    private final int DEFAULT_FORMAT=6;
-    String[][] numberZero={
+    private int digitNumber=0;
+    private static final int DEFAULT_DIGIT_NUMBER=6;
+    private static String[][] numberZero={
 	    	{""},
 	    	{"","0"},
 	    	{"","00","0"},
@@ -39,7 +39,7 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
 	    	{"","0000","000","00","0"},
 	    	{"","00000","0000","000","00","0"},
 	    };
-    long[] integerMultipleOfTen={0,10,100,1000,10000,100000};
+    private static long[] integerMultipleOfTen={1,10,100,1000,10000,100000};
     
     /**
      * Private constructor.
@@ -50,10 +50,10 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
     private SubMillisPatternConverter(final String[] options) {
         super("SubMillis", "submillis");
         if ((options.length <= 0) || !(options[0].matches("1|2|3|4|5|6")) || (options[0].length() != 1)){
-		this.format=DEFAULT_FORMAT;
+		this.digitNumber=DEFAULT_DIGIT_NUMBER;
         }
         else
-            this.format = Integer.parseInt(options[0]);
+            this.digitNumber = Integer.parseInt(options[0]);
     }
 
     /**
@@ -67,13 +67,13 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
         return new SubMillisPatternConverter(options);
     }
     
-    public String getSubMillisFormatedWithZero(long[] valueInFormat){
-	String value=String.valueOf(valueInFormat[this.format-1]);
-	for(int i=0;i<this.format;i++){
-	    if(valueInFormat[this.format-1]<this.integerMultipleOfTen[i])
-		return numberZero[this.format-1][i]+value;
+    private String getSubMillisFormatedWithZero(long subMillis){
+	for(int i=0;i<this.digitNumber;i++){
+	    if((subMillis/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]) )<integerMultipleOfTen[i]){
+		return numberZero[this.digitNumber-1][i]+(subMillis/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]));
+	    }
 	}
-	return value;
+	return String.valueOf(subMillis/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]));
     }
 
     /**
@@ -81,8 +81,6 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
      */
     @Override
     public void format(final LogEvent event, final StringBuilder output) {
-	long subMillis = event.getNanoTime() % 1000000L;
-	long[] longInFormat={subMillis / 100000,subMillis / 10000, subMillis / 1000, subMillis / 100,subMillis / 10,subMillis};
-	output.append(getSubMillisFormatedWithZero(longInFormat));
+	output.append(getSubMillisFormatedWithZero(event.getNanoTime() % 1000000L));
     }
 }
