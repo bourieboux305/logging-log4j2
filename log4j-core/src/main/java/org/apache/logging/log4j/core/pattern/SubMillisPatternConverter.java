@@ -37,11 +37,11 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
     /** zero to add if number don't reach the number of digit asked **/
     private static String[][] numberZero={
 	    	{""},//number of digit = 1
-	    	{"","0"},//number of digit = 2
-	    	{"","00","0"},//number of digit = 3
-	    	{"","000","00","0"},//number of digit = 4
-	    	{"","0000","000","00","0"},//number of digit = 5
-	    	{"","00000","0000","000","00","0"},//number of digit = 6
+	    	{"0","0"},//number of digit = 2
+	    	{"00","00","0"},//number of digit = 3
+	    	{"000","000","00","0"},//number of digit = 4
+	    	{"000","0000","000","00","0"},//number of digit = 5
+	    	{"00000","00000","0000","000","00","0"},//number of digit = 6
 	    };
     private static long[] integerMultipleOfTen={1,10,100,1000,10000,100000};
     

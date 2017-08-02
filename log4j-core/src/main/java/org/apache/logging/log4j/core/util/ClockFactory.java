@@ -78,6 +78,11 @@ public final class ClockFactory {
             LOGGER.trace("Using specified CoarseCachedClock for timestamps.");
             return CoarseCachedClock.instance();
         }
+        if (PosixClock.class.getName().equals(userRequest)
+                || "PosixClock".equals(userRequest)) {
+            LOGGER.trace("Using specified PosixClock for timestamps.");
+            return PosixClock.instance();
+        }
         try {
             final Clock result = Loader.newCheckedInstanceOf(userRequest, Clock.class);
             LOGGER.trace("Using {} for timestamps.", result.getClass().getName());
