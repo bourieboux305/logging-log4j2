@@ -21,7 +21,6 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.status.StatusLogger;
 import org.apache.logging.log4j.util.PerformanceSensitive;
 
-import com.jayway.jsonpath.internal.function.json.Append;
 
 /**
  * Converts and formats the event's nanoTime in a StringBuilder.
@@ -55,10 +54,10 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
     private SubMillisPatternConverter(final String[] options) {
         super("SubMillis", "submillis");
         if ((options.length <= 0) || !(options[0].matches("1|2|3|4|5|6")) || (options[0].length() != 1)){
-		this.digitNumber=DEFAULT_DIGIT_NUMBER;
+            StatusLogger.getLogger().warn("impossible to parse parameters of 'sm'. number of digits apply by default is 6");
+            this.digitNumber=DEFAULT_DIGIT_NUMBER;
         }
         else{
-            StatusLogger.getLogger().warn("impossible to parse parameters of 'sm'. number of digits apply by default is 6");
             this.digitNumber = Integer.parseInt(options[0]);
         }
     }
@@ -79,9 +78,9 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
      */
     @Override
     public void format(final LogEvent event, final StringBuilder output) {
-	for(int i=0;i<this.digitNumber;i++){
+	for(int i=0;i<this.digitNumber;i++){//test the number if we should put a zero to complete the number digits asked
 	    if(((event.getNanoTime() % 1000000L)/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]) )<integerMultipleOfTen[i]){
-		 output.append(numberZero[this.digitNumber-1][i]);
+		 output.append(numberZero[this.digitNumber-1][i]);//put the zero before the number to match the number digit asked
 		 output.append((event.getNanoTime() % 1000000L)/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]));
 		 return;
 	    }
