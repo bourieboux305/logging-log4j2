@@ -44,6 +44,12 @@ public class TimeFilterTest {
         public long currentTimeMillis() {
             return CLOCKTIME;
         }
+
+	@Override
+	public long nanoTime() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
     }
 
     @BeforeClass

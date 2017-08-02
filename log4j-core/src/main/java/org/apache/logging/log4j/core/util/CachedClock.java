@@ -85,4 +85,10 @@ public final class CachedClock implements Clock {
         }
         return millis;
     }
+
+    @Override
+    public long nanoTime() {
+	// TODO Auto-generated method stub
+	return 0;
+    }
 }

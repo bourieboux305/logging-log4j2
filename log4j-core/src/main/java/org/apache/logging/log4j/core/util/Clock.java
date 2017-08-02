@@ -19,7 +19,7 @@ package org.apache.logging.log4j.core.util;
 /**
  * Provides the time stamp used in log events.
  */
-public interface Clock {
+public interface Clock extends NanoClock{
     /**
      * Returns the time in milliseconds since the epoch.
      *

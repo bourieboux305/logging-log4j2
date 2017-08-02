@@ -93,6 +93,11 @@ public class AsyncLoggerTimestampMessageTest {
             called = true;
             return 987654321L;
         }
+	@Override
+	public long nanoTime() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
     }
 
     static class TimeMsg extends SimpleMessage implements TimestampMessage {

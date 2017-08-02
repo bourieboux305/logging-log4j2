@@ -132,6 +132,12 @@ public class ClocksBenchmark {
         public long currentTimeMillis() {
             return fixedTime;
         }
+
+	@Override
+	public long nanoTime() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
     }
 
     private static final class FixedFinalTimeClock implements Clock {
@@ -145,6 +151,12 @@ public class ClocksBenchmark {
         public long currentTimeMillis() {
             return fixedFinalTime;
         }
+
+	@Override
+	public long nanoTime() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
     }
 
     private static final class OldCachedClock implements Clock {
@@ -193,5 +205,11 @@ public class ClocksBenchmark {
             }
             return millis;
         }
+
+	@Override
+	public long nanoTime() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
     }
 }

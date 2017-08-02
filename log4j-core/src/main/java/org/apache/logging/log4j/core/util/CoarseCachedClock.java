@@ -75,4 +75,10 @@ public final class CoarseCachedClock implements Clock {
     public long currentTimeMillis() {
         return millis;
     }
+
+    @Override
+    public long nanoTime() {
+	// TODO Auto-generated method stub
+	return 0;
+    }
 }

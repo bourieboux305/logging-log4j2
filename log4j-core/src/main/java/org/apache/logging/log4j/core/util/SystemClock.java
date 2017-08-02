@@ -30,4 +30,10 @@ public final class SystemClock implements Clock {
         return System.currentTimeMillis();
     }
 
+    @Override
+    public long nanoTime() {
+	// TODO Auto-generated method stub
+	return 0;
+    }
+
 }

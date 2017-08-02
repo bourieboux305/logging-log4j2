@@ -92,6 +92,12 @@ public class ClockFactoryTest {
         public long currentTimeMillis() {
             return 42;
         }
+
+	@Override
+	public long nanoTime() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
     }
 
     @Test

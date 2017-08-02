@@ -73,6 +73,12 @@ public class Log4jLogEventTest {
         public long currentTimeMillis() {
             return FIXED_TIME;
         }
+
+	@Override
+	public long nanoTime() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
     }
 
     @BeforeClass

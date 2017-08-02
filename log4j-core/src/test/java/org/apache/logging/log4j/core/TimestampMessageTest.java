@@ -86,6 +86,12 @@ public class TimestampMessageTest {
         public long currentTimeMillis() {
             throw new RuntimeException("This should not have been called");
         }
+
+	@Override
+	public long nanoTime() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
     }
 
     static class TimeMsg extends SimpleMessage implements TimestampMessage {
