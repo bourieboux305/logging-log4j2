@@ -186,7 +186,7 @@ public final class PatternParser {
                 // LOG4J2-1074 Switch to actual clock if nanosecond timestamps are required in config.
                 // LOG4J2-1248 set config nanoclock
                 if (config != null) {
-                    config.setNanoClock(PosixClock.instance());
+                    config.setNanoClock(ClockFactory.getClock());
                 }
             }
             LogEventPatternConverter pc;

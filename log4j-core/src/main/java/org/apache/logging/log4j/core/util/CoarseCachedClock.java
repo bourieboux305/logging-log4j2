@@ -78,7 +78,6 @@ public final class CoarseCachedClock implements Clock {
 
     @Override
     public long nanoTime() {
-	// TODO Auto-generated method stub
-	return 0;
+	return System.nanoTime();
     }
 }

@@ -43,7 +43,7 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
 	    	{"000","0000","000","00","0"},//number of digit = 5
 	    	{"00000","00000","0000","000","00","0"},//number of digit = 6
 	    };
-    private static long[] integerMultipleOfTen={1,10,100,1000,10000,100000};
+    private static long[] integerMultipleOfTen={1L,10L,100L,1000L,10000L,100000L};
     
     /**
      * Private constructor.
@@ -53,7 +53,7 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
      */
     private SubMillisPatternConverter(final String[] options) {
         super("SubMillis", "submillis");
-        if ((options.length <= 0) || !(options[0].matches("1|2|3|4|5|6")) || (options[0].length() != 1)){
+        if ((options.length <= 0) || !(options[0].matches("1|2|3|4|5|6")) || (options[0].length() != 1)){//test if parameters is an integer between 1 to 6
             StatusLogger.getLogger().warn("impossible to parse parameters of 'sm'. number of digits apply by default is 6");
             this.digitNumber=DEFAULT_DIGIT_NUMBER;
         }
@@ -78,13 +78,13 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
      */
     @Override
     public void format(final LogEvent event, final StringBuilder output) {
-	for(int i=0;i<this.digitNumber;i++){//test the number if we should put a zero to complete the number digits asked
+	for(int i=0;i<this.digitNumber;i++){//test value if we should put a zero to complete the number digits asked
 	    if(((event.getNanoTime() % 1000000L)/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]) )<integerMultipleOfTen[i]){
-		 output.append(numberZero[this.digitNumber-1][i]);//put the zero before the number to match the number digit asked
+		 output.append(numberZero[this.digitNumber-1][i]);//put the zero before the value to match the number digit asked
 		 output.append((event.getNanoTime() % 1000000L)/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]));
 		 return;
 	    }
 	}
-	output.append((event.getNanoTime() % 1000000L) / (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]));
+	output.append((event.getNanoTime() % 1000000L) / (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]));//append nanotime if it didn't need zero before the value
     }
 }

@@ -32,8 +32,7 @@ public final class SystemClock implements Clock {
 
     @Override
     public long nanoTime() {
-	// TODO Auto-generated method stub
-	return 0;
+	return System.nanoTime();
     }
 
 }
