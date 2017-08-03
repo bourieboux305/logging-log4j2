@@ -16,6 +16,7 @@
  */
 package org.apache.logging.log4j.core.util;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 /**
@@ -78,6 +79,6 @@ public final class CoarseCachedClock implements Clock {
 
     @Override
     public long nanoTime() {
-	return System.nanoTime();
+	return millis*TimeUnit.SECONDS.toMicros(1L);
     }
 }

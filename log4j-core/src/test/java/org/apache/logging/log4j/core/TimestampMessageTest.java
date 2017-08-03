@@ -89,8 +89,7 @@ public class TimestampMessageTest {
 
 	@Override
 	public long nanoTime() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    throw new RuntimeException("This should not have been called");
 	}
     }
 

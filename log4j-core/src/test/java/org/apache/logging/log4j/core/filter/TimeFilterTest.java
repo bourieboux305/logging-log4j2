@@ -18,6 +18,7 @@ package org.apache.logging.log4j.core.filter;
 
 import java.util.Calendar;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.Filter;
@@ -47,8 +48,7 @@ public class TimeFilterTest {
 
 	@Override
 	public long nanoTime() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    return CLOCKTIME*TimeUnit.SECONDS.toNanos(1L);
 	}
     }
 

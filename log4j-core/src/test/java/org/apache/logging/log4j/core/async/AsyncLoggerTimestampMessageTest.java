@@ -95,8 +95,8 @@ public class AsyncLoggerTimestampMessageTest {
         }
 	@Override
 	public long nanoTime() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    called = true;
+            return 987654321L;
 	}
     }
 

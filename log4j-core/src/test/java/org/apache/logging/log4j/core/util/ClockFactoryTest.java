@@ -95,8 +95,7 @@ public class ClockFactoryTest {
 
 	@Override
 	public long nanoTime() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    return 42000000;
 	}
     }
 

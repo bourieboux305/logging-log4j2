@@ -135,8 +135,7 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    return fixedTime*TimeUnit.SECONDS.toMicros(1L);
 	}
     }
 
@@ -154,8 +153,7 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    return fixedFinalTime*TimeUnit.SECONDS.toMicros(1L);
 	}
     }
 
@@ -208,8 +206,7 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    return millis*TimeUnit.SECONDS.toMicros(1L);
 	}
     }
 }

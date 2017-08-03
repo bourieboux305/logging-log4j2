@@ -76,8 +76,7 @@ public class Log4jLogEventTest {
 
 	@Override
 	public long nanoTime() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    return FIXED_TIME;
 	}
     }
 
