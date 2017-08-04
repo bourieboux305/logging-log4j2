@@ -32,6 +32,7 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
     
     
     private int digitNumber=0;//number of digit to print in submilliseconde
+    private int index;
     private static final int DEFAULT_DIGIT_NUMBER=6;
     
     /** zero to add if number don't reach the number of digit asked **/
@@ -78,9 +79,9 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
      */
     @Override
     public void format(final LogEvent event, final StringBuilder output) {
-	for(int i=0;i<this.digitNumber;i++){//test value if we should put a zero to complete the number digits asked
-	    if(((event.getNanoTime() % 1000000L)/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]) )<integerMultipleOfTen[i]){
-		 output.append(numberZero[this.digitNumber-1][i]);//put the zero before the value to match the number digit asked
+	for(index=0;index<this.digitNumber;index++){//test value if we should put a zero to complete the number digits asked
+	    if(((event.getNanoTime() % 1000000L)/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]) )<integerMultipleOfTen[index]){
+		 output.append(numberZero[this.digitNumber-1][index]);//put the zero before the value to match the number digit asked
 		 output.append((event.getNanoTime() % 1000000L)/ (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]));
 		 return;
 	    }

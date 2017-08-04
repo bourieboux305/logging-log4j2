@@ -135,7 +135,7 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    return fixedTime*TimeUnit.SECONDS.toMicros(1L);
+	    return fixedTime*TimeUnit.MILLISECONDS.toMicros(1L);
 	}
     }
 
@@ -153,7 +153,7 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    return fixedFinalTime*TimeUnit.SECONDS.toMicros(1L);
+	    return fixedFinalTime*TimeUnit.MILLISECONDS.toMicros(1L);
 	}
     }
 
@@ -206,7 +206,7 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    return millis*TimeUnit.SECONDS.toMicros(1L);
+	    return millis*TimeUnit.MILLISECONDS.toMicros(1L);
 	}
     }
 }

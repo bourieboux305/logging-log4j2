@@ -48,7 +48,7 @@ public class TimeFilterTest {
 
 	@Override
 	public long nanoTime() {
-	    return CLOCKTIME*TimeUnit.SECONDS.toNanos(1L);
+	    return CLOCKTIME*TimeUnit.MILLISECONDS.toNanos(1L);
 	}
     }
 

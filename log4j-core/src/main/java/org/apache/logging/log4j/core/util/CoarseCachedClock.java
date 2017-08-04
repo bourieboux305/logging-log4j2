@@ -79,6 +79,6 @@ public final class CoarseCachedClock implements Clock {
 
     @Override
     public long nanoTime() {
-	return millis*TimeUnit.SECONDS.toMicros(1L);
+	return millis*TimeUnit.MILLISECONDS.toNanos(1L);
     }
 }
