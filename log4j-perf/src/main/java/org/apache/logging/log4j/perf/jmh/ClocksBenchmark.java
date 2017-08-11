@@ -123,6 +123,7 @@ public class ClocksBenchmark {
 
     private static final class FixedTimeClock implements Clock {
         private final long fixedTime;
+        private final long MILLIS_TO_NANO = TimeUnit.MILLISECONDS.toNanos(1L);
 
         public FixedTimeClock(final long fixedTime) {
             this.fixedTime = fixedTime;
@@ -135,13 +136,14 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    return fixedTime*TimeUnit.MILLISECONDS.toMicros(1L);
+	    return fixedTime*MILLIS_TO_NANO;
 	}
     }
 
     private static final class FixedFinalTimeClock implements Clock {
         private final long fixedFinalTime;
-
+        private final long MILLIS_TO_NANO = TimeUnit.MILLISECONDS.toNanos(1L);
+        
         public FixedFinalTimeClock(final long fixedTime) {
             this.fixedFinalTime = fixedTime;
         }
@@ -153,11 +155,12 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    return fixedFinalTime*TimeUnit.MILLISECONDS.toMicros(1L);
+	    return fixedFinalTime * MILLIS_TO_NANO;
 	}
     }
 
     private static final class OldCachedClock implements Clock {
+	private final long MILLIS_TO_NANO = TimeUnit.MILLISECONDS.toNanos(1L);
         private static final int UPDATE_THRESHOLD = 0x3FF;
         private static volatile OldCachedClock instance;
         private static final Object INSTANCE_LOCK = new Object();
@@ -206,7 +209,7 @@ public class ClocksBenchmark {
 
 	@Override
 	public long nanoTime() {
-	    return millis*TimeUnit.MILLISECONDS.toMicros(1L);
+	    return millis * MILLIS_TO_NANO;
 	}
     }
 }

@@ -96,7 +96,7 @@ public class AsyncLoggerTimestampMessageTest {
 	@Override
 	public long nanoTime() {
 	    called = true;
-            return 987654321L;
+            return 987654321L * 1_000_000L;
 	}
     }
 

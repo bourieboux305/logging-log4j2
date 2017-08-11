@@ -41,6 +41,7 @@ public class TimeFilterTest {
 
     /** Helper class */
     public static class FixedTimeClock implements Clock {
+	private final long MILLIS_TO_NANO=TimeUnit.MILLISECONDS.toNanos(1L);
         @Override
         public long currentTimeMillis() {
             return CLOCKTIME;
@@ -48,7 +49,7 @@ public class TimeFilterTest {
 
 	@Override
 	public long nanoTime() {
-	    return CLOCKTIME*TimeUnit.MILLISECONDS.toNanos(1L);
+	    return CLOCKTIME * MILLIS_TO_NANO;
 	}
     }
 

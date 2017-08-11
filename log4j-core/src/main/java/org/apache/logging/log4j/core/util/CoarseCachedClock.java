@@ -28,6 +28,7 @@ public final class CoarseCachedClock implements Clock {
     private static final Object INSTANCE_LOCK = new Object();
     // ignore IDE complaints; volatile long is fine
     private volatile long millis = System.currentTimeMillis();
+    private final long MILLIS_TO_NANO=TimeUnit.MILLISECONDS.toNanos(1L);
 
     private final Thread updater = new Log4jThread("CoarseCachedClock Updater Thread") {
         @Override
@@ -79,6 +80,6 @@ public final class CoarseCachedClock implements Clock {
 
     @Override
     public long nanoTime() {
-	return millis*TimeUnit.MILLISECONDS.toNanos(1L);
+	return millis * MILLIS_TO_NANO;
     }
 }

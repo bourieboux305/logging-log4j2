@@ -49,6 +49,7 @@ public class SubMillisPatternConverterTest {
     public void testConverterAppendsLogEventSubMillisWithAddZeroToStringBuilder() {
         final LogEvent event = Log4jLogEvent.newBuilder() //
                 .setNanoTime(123).build();
+        final StringBuilder sb = new StringBuilder();
         final StringBuilder sb1 = new StringBuilder();
         final StringBuilder sb2 = new StringBuilder();
         final StringBuilder sb3 = new StringBuilder();
@@ -56,18 +57,22 @@ public class SubMillisPatternConverterTest {
         final StringBuilder sb5 = new StringBuilder();
         final StringBuilder sb6 = new StringBuilder();
         
+        final String[] options={};
         final String[] options1={"1"};
         final String[] options2={"2"};
         final String[] options3={"3"};
         final String[] options4={"4"};
         final String[] options5={"5"};
         final String[] options6={"6"};
+        final SubMillisPatternConverter converter = SubMillisPatternConverter.newInstance(options);
         final SubMillisPatternConverter converter1 = SubMillisPatternConverter.newInstance(options1);
         final SubMillisPatternConverter converter2 = SubMillisPatternConverter.newInstance(options2);
         final SubMillisPatternConverter converter3 = SubMillisPatternConverter.newInstance(options3);
         final SubMillisPatternConverter converter4 = SubMillisPatternConverter.newInstance(options4);
         final SubMillisPatternConverter converter5 = SubMillisPatternConverter.newInstance(options5);
         final SubMillisPatternConverter converter6 = SubMillisPatternConverter.newInstance(options6);
+        converter.format(event, sb);
+        assertEquals("000123", sb.toString());
         converter1.format(event, sb1);
         assertEquals("0", sb1.toString());
         converter2.format(event, sb2);
@@ -86,6 +91,7 @@ public class SubMillisPatternConverterTest {
     public void testConverterAppendsLogEventSubMillisZeroToStringBuilder() {
         final LogEvent event = Log4jLogEvent.newBuilder() //
                 .setNanoTime(0).build();
+        final StringBuilder sb = new StringBuilder();
         final StringBuilder sb1 = new StringBuilder();
         final StringBuilder sb2 = new StringBuilder();
         final StringBuilder sb3 = new StringBuilder();
@@ -93,18 +99,22 @@ public class SubMillisPatternConverterTest {
         final StringBuilder sb5 = new StringBuilder();
         final StringBuilder sb6 = new StringBuilder();
         
+        final String[] options={};
         final String[] options1={"1"};
         final String[] options2={"2"};
         final String[] options3={"3"};
         final String[] options4={"4"};
         final String[] options5={"5"};
         final String[] options6={"6"};
+        final SubMillisPatternConverter converter = SubMillisPatternConverter.newInstance(options);
         final SubMillisPatternConverter converter1 = SubMillisPatternConverter.newInstance(options1);
         final SubMillisPatternConverter converter2 = SubMillisPatternConverter.newInstance(options2);
         final SubMillisPatternConverter converter3 = SubMillisPatternConverter.newInstance(options3);
         final SubMillisPatternConverter converter4 = SubMillisPatternConverter.newInstance(options4);
         final SubMillisPatternConverter converter5 = SubMillisPatternConverter.newInstance(options5);
         final SubMillisPatternConverter converter6 = SubMillisPatternConverter.newInstance(options6);
+        converter.format(event, sb);
+        assertEquals("000000", sb.toString());
         converter1.format(event, sb1);
         assertEquals("0", sb1.toString());
         converter2.format(event, sb2);

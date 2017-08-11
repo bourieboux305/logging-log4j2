@@ -31,11 +31,11 @@ import org.apache.logging.log4j.util.PerformanceSensitive;
 public final class SubMillisPatternConverter extends LogEventPatternConverter {
 
 
-    private int digitNumber=0;//number of digit to print in submilliseconde
+    private final int digitNumber;//number of digit to print in submilliseconde
     private static final int DEFAULT_DIGIT_NUMBER=6;
-    private static String[] numberZero={"","0","00","000","0000","00000"};
-    private static long[] integerMultipleOfTen={1L,10L,100L,1000L,10000L,100000L};
-
+    private static String[] numberOfZero={"","0","00","000","0000","00000"};
+    private final long valueLengthGetter;
+    
     /**
      * Private constructor.
      *
@@ -44,13 +44,19 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
      */
     private SubMillisPatternConverter(final String[] options) {
 	super("SubMillis", "submillis");
-	if ((options.length <= 0) || !(options[0].matches("1|2|3|4|5|6")) || (options[0].length() != 1)){//test if parameters is an integer between 1 to 6
+	//test if parameters is an integer between 1 to 6
+	if ((options.length <= 0) || !(options[0].matches("1|2|3|4|5|6")) || (options[0].length() != 1)){
 	    StatusLogger.getLogger().warn("impossible to parse parameters of 'sm'. number of digits apply by default is 6");
 	    this.digitNumber=DEFAULT_DIGIT_NUMBER;
 	}
 	else{
 	    this.digitNumber = Integer.parseInt(options[0]);
 	}
+	long toGetLength=100_000L;
+	for(int i=1;i<this.digitNumber;i++){
+	    toGetLength=toGetLength/10;
+	}
+	valueLengthGetter=toGetLength;
     }
 
     /**
@@ -64,7 +70,7 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
 	return new SubMillisPatternConverter(options);
     }
     /** 6 is the number of digit maximum in sub millisecond . ex: 999 999**/
-    int valueSize(Long paramLong){
+    private int valueLength(Long paramLong){
 	long l = 10L;
 	for (int i = 1; i < 6; ++i)
 	{
@@ -80,10 +86,10 @@ public final class SubMillisPatternConverter extends LogEventPatternConverter {
      */
     @Override
     public void format(final LogEvent event, final StringBuilder output) {
-	long value=(event.getNanoTime() % 1000000L) / (integerMultipleOfTen[DEFAULT_DIGIT_NUMBER-this.digitNumber]);
-	int valueSize=valueSize(value);
-	if(this.digitNumber - valueSize>0){
-	    output.append(numberZero[this.digitNumber - valueSize]);//add zero if needed
+	long value = (event.getNanoTime() % 1000000L) / valueLengthGetter;
+	int numberOfLeadingZeros = this.digitNumber - valueLength(value);
+	if(numberOfLeadingZeros > 0){
+	    output.append(numberOfZero[numberOfLeadingZeros]);//add zero if needed
 	}
 	output.append(value);
     }

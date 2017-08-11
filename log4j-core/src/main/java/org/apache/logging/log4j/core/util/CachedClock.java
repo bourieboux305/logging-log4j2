@@ -30,6 +30,7 @@ import java.util.concurrent.locks.LockSupport;
 public final class CachedClock implements Clock {
     private static final int UPDATE_THRESHOLD = 1000;
     private static volatile CachedClock instance;
+    private final long MILLIS_TO_NANO=TimeUnit.MILLISECONDS.toNanos(1L);
     private static final Object INSTANCE_LOCK = new Object();
     private volatile long millis = System.currentTimeMillis();
     private short count = 0;
@@ -89,6 +90,6 @@ public final class CachedClock implements Clock {
 
     @Override
     public long nanoTime() {
-	return millis* TimeUnit.MILLISECONDS.toNanos(1L);
+	return millis* MILLIS_TO_NANO;
     }
 }
